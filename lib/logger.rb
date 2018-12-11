@@ -479,7 +479,9 @@ class Logger
   # device exists, return +nil+.
   #
   def <<(msg)
-    @logdev&.write(msg)
+    unless @logdev.nil?
+      @logdev.write(msg)
+    end
   end
 
   #
@@ -566,7 +568,7 @@ class Logger
   # Close the logging device.
   #
   def close
-    @logdev&.close
+    @logdev.close if @logdev
   end
 
 private
